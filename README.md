@@ -1,8 +1,8 @@
 # Token Radar
 
-[![make.fun](https://make.fun/api/competitions/token-radar-01/badge?repo=lgwsgc/token-radar)](https://make.fun/bounty/token-radar-01)
-[![make.fun](https://make.fun/api/competitions/token-radar-01/badge?repo=lgwsgc/token-radar&metric=prize)](https://make.fun/bounty/token-radar-01)
-[![make.fun](https://make.fun/api/competitions/token-radar-01/badge?repo=lgwsgc/token-radar&metric=submissions)](https://make.fun/bounty/token-radar-01)
+[![make.fun · token-radar-01](https://make.fun/badge/token-radar-01.svg)](https://make.fun/bounty/token-radar-01?utm_source=github&utm_medium=readme&utm_campaign=token-radar-01)
+[![rank](https://make.fun/badge/token-radar-01/lgwsgc/token-radar/rank.svg)](https://make.fun/bounty/token-radar-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=token-radar-01)
+[![reward](https://make.fun/badge/token-radar-01/lgwsgc/token-radar/reward.svg)](https://make.fun/bounty/token-radar-01?utm_source=github&utm_medium=readme&utm_campaign=token-radar-01)
 
 A radar for protocols that have not launched a token yet. It reads a sealed DefiLlama snapshot, ranks every eligible pre-token protocol by an implied launch value, and hands each one a concrete farm plan — all on a static dashboard that makes no network request.
 
