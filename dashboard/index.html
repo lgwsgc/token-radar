@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — protocols still waiting on a launch</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <span class="radar-dot" aria-hidden="true"></span>
+      <div>
+        <h1>Token Radar</h1>
+        <p class="tagline">Every protocol with no token yet, ranked by what its launch would be worth — and how to farm it.</p>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <noscript><p class="empty">This dashboard needs JavaScript: it renders the board from its data file.</p></noscript>
+  <section class="controls" id="controls">
+    <label class="search">Search
+      <input id="q" type="search" placeholder="Name or slug…" autocomplete="off">
+    </label>
+    <label>Category
+      <select id="category"><option value="">All categories</option></select>
+    </label>
+    <label>Chain
+      <select id="chain"><option value="">All chains</option></select>
+    </label>
+    <label class="check"><input id="watchlistOnly" type="checkbox"> Watchlist only</label>
+    <label>Sort by
+      <select id="sort">
+        <option value="implied">Implied value</option>
+        <option value="tvl">TVL</option>
+        <option value="growth">7-day growth</option>
+        <option value="age">Time with no token</option>
+      </select>
+    </label>
+    <span class="count" id="count"></span>
+  </section>
+
+  <section class="detail hidden" id="detail" aria-live="polite"></section>
+
+  <section class="board-wrap">
+    <table class="board" id="board">
+      <thead>
+        <tr>
+          <th data-sort="rank">#</th>
+          <th data-sort="name">Protocol</th>
+          <th data-sort="category">Category</th>
+          <th data-sort="chains">Chains</th>
+          <th data-sort="tvl" class="num">TVL</th>
+          <th data-sort="growth" class="num">7d</th>
+          <th data-sort="age" class="num">No token for</th>
+          <th data-sort="implied" class="num">Implied value</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="empty hidden" id="empty">No protocol matches these filters.</p>
+  </section>
+
+  <section class="model" id="model">
+    <h2>How the ranking works</h2>
+    <p>Every row is a protocol the snapshot records with no token, and none is a wrapped, staked or bridged product of a token that already trades, a centralised exchange, or a versioned copy. The board holds all 40 of the snapshot's watchlist protocols, plus every other eligible one.</p>
+    <p class="formula">implied value = TVL &times; category multiple &times; growth factor &times; age factor &times; chain factor</p>
+    <ul>
+      <li><strong>Category multiple</strong> — the median market-cap-to-TVL ratio of the tokened protocols in the same category, computed from this snapshot. A category with fewer than four tokened comparables uses the global median.</li>
+      <li><strong>Growth factor</strong> — the protocol's seven-day TVL change, counted at half weight and clamped to &minus;40%…+80%, so one wild week cannot set the price.</li>
+      <li><strong>Age factor</strong> — how long the protocol has run with no token, rising from 0.75 toward 1.00 and saturating after about a year.</li>
+      <li><strong>Chain factor</strong> — 3% per chain it runs on, up to ten chains.</li>
+    </ul>
+    <p class="note">Implied values are this radar's own claim from the snapshot's figures, never a prediction that a token will be issued or what it will trade at. “Records no token” means the snapshot records none; a protocol may still have one its DefiLlama record does not carry.</p>
+    <h3>Category multiples used</h3>
+    <table class="comps" id="comps">
+      <thead><tr><th>Category</th><th class="num">Board rows</th><th class="num">Multiple</th></tr></thead>
+      <tbody id="compRows"></tbody>
+    </table>
+  </section>
+
+  <footer class="foot">
+    <p>Data: DefiLlama protocol snapshot, fetched once and frozen for this competition. The dashboard reads its own data file and makes no network request.</p>
+  </footer>
+</main>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
